@@ -5,14 +5,14 @@ using System.Linq.Expressions;
 /* TODO: Add Select Pattern
  */
 
-namespace Repository.SQLServer
+namespace FatRepository.SQLServer
 {
-    internal class GenericRepository<T> where T : class
+    internal class FatRepository<T> where T : class
     {
         private readonly DbContext _dbContext;
         private readonly DbSet<T> _dbSet;
 
-        public GenericRepository(DbContext dbContext)
+        public FatRepository(DbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = dbContext.Set<T>();
