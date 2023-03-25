@@ -24,7 +24,7 @@ services.AddFatRepository();
 Factory:
 ```
 IFatRepository repo = FatFactoryInstaller.CreateFatRepository<Blog>(context);
-IFatUnitOfWork unitOfWork = FatFactoryInstaller.CreateUnitOfWork<Blog>(context);
+IFatUnitOfWork unitOfWork = FatFactoryInstaller.CreateUnitOfWork(context);
 ```
 
 Now you can use this in your application service layer.
