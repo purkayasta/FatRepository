@@ -1,26 +1,29 @@
-﻿# WIP FatRepository
+﻿# FatRepository For EFCore
+## Give it a star if you like the project. 👏 🌠 🌟
 
-An Handful predefined methods that every efcore projects need. 
+FatRepository is an Handful predefined methods that every efcore projects need. 
 
-Tasks:
-- [x] Basic Add Update Methods
-- [x] Simple Find Methods (Sync and Async)
-- [x] Includable Queries (Sync and Async)
-- [x] Selectable Queries (Sync and Async)
-- [x] Create Contract for the use
-- [x] Extension for service collection
-- [x] Create Factories for console applications/webapi
+![Nuget](https://img.shields.io/nuget/v/FatRepository)
+![Nuget](https://img.shields.io/nuget/dt/FatRepository?style=plastic)
+![Nuget](https://img.shields.io/github/repo-size/purkayasta/FatRepository?style=social)
+![Nuget](https://img.shields.io/github/last-commit/purkayasta/FatRepository?style=flat-square)
+
+[Nuget](https://www.nuget.org/packages/FatRepository/)
+
+## Usage:
+### Required:
+> Have to configure DbContext first then register the service.
+
 
 -------------------------------------------------------------------------
+### Service Registration:
 
-Two ways to use it. 
-Microsoft DI:
+With Microsoft DI:
 ```c#
 services.AddFatRepository();
 ```
 
-
-Factory:
+With Factory:
 ```
 var dbContext = new YourDbContext();
 IFatRepository repo = FatFactoryInstaller.CreateFatRepository<Blog, YourDbContext>(dbContext);
@@ -50,7 +53,6 @@ public class BlogService
 
 }
 ```
-
 
 
 Made with C# ❤
