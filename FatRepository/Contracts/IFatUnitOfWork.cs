@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace FatRepository.SQLServer.Contracts
+namespace FatRepository.Contracts
 {
-    public interface IFatUnitOfWork
+    public interface IFatUnitOfWork<TDbContext> where TDbContext : DbContext
     {
         ChangeTracker ChangeTracker { get; }
 

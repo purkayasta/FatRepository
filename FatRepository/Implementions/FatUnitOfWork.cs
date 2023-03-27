@@ -1,15 +1,15 @@
-﻿using FatRepository.SQLServer.Contracts;
+﻿using FatRepository.Contracts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace FatRepository.SQLServer.Implementions
+namespace FatRepository.Implementions
 {
-    internal class FatUnitOfWork : IFatUnitOfWork
+    internal class FatUnitOfWork<TDbContext> : IFatUnitOfWork<TDbContext> where TDbContext : DbContext
     {
-        private readonly DbContext _dbContext;
+        private readonly TDbContext _dbContext;
 
-        public FatUnitOfWork(DbContext dbContext) => _dbContext = dbContext;
+        public FatUnitOfWork(TDbContext dbContext) => _dbContext = dbContext;
 
         public ChangeTracker ChangeTracker { get => _dbContext.ChangeTracker; }
 
