@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FatRepository.SQLServer\FatRepository.SQLServer.csproj" />
+    <ProjectReference Include="..\FatRepository.SQLServer\FatRepository.csproj" />
+    <ProjectReference Include="..\FatRepository\FatRepository.csproj" />
   </ItemGroup>
 
 </Project>

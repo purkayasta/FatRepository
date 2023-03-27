@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using FatRepository.SQLServer;
-using FatRepository.SQLServer.Installer;
+
+using FatRepository.Installer;
 using Microsoft.EntityFrameworkCore;
 
 
