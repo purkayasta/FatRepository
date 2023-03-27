@@ -1,6 +1,6 @@
 ﻿# WIP FatRepository
 
-An Handful predefined methods that every project needs. 
+An Handful predefined methods that every efcore projects need. 
 
 Tasks:
 - [x] Basic Add Update Methods
@@ -9,8 +9,7 @@ Tasks:
 - [x] Selectable Queries (Sync and Async)
 - [x] Create Contract for the use
 - [x] Extension for service collection
-- [x] Create Factories for console applications
-- [ ] Create tests for all the methods
+- [x] Create Factories for console applications/webapi
 
 -------------------------------------------------------------------------
 
@@ -23,8 +22,9 @@ services.AddFatRepository();
 
 Factory:
 ```
-IFatRepository repo = FatFactoryInstaller.CreateFatRepository<Blog>(context);
-IFatUnitOfWork unitOfWork = FatFactoryInstaller.CreateUnitOfWork(context);
+var dbContext = new YourDbContext();
+IFatRepository repo = FatFactoryInstaller.CreateFatRepository<Blog, YourDbContext>(dbContext);
+IFatUnitOfWork unitOfWork = FatFactoryInstaller.CreateUnitOfWork<YourDbContext>(dbContext);
 ```
 
 Now you can use this in your application service layer.
@@ -33,10 +33,10 @@ Now you can use this in your application service layer.
 ```c#
 public class BlogService 
 {
-	private readony IFatRepository<Blog> _repository;
-	private readonly IFatUnitOfWork _unitOfWork;
+	private readony IFatRepository<Blog, YourDbContext> _repository;
+	private readonly IFatUnitOfWork<YourDbContext _unitOfWork;
 
-	public BlogService(IFatRepository<Blog> repo, IFatUnitOfWork unitOfWork) 
+	public BlogService(IFatRepository<Blog, YourDbContext> repo, IFatUnitOfWork<YourDbContext> unitOfWork) 
 	{
 		_repository = repo;
 		_unitOfWork = unitOfWork;
