@@ -21,7 +21,7 @@ namespace FatRepository.SQLServer.Test.API.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IActionResult> Get()
         {
-            var vals = _forcastRepository.Find();
+            var vals = await _forcastRepository.FindAsync();
             return Ok(vals);
         }
 

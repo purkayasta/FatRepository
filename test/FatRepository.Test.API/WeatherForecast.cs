@@ -6,7 +6,7 @@ namespace FatRepository.SQLServer.Test.API
     {
         [Key]
         public int Id { get; set; }
-        public string Location { get; set; }
+        public string? Location { get; set; }
         public int Weather { get; set; }
     }
 }
