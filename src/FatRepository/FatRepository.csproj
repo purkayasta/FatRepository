@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<IsPackable>true</IsPackable>
+		<PackageId>FatRepository</PackageId>
+		<PackageVersion>0.1</PackageVersion>
+		<PackageTags>GenericRepository, Repository, Efcore, C#, dotnet</PackageTags>
+		<Description>a generic repository alternative that will save your time to implement on your own.</Description>
+		<Authors>Pritom Purkayasta</Authors>
+		<RepositoryType>Git</RepositoryType>
+		<RepositoryUrl>https://github.com/purkayasta/FatRepository</RepositoryUrl>
+		<PackageProjectUrl>https://www.nuget.org/packages/FatRepository/</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<Copyright>Pritom Purkayasta
+Copyright (c) Pritom Purkayasta All rights reserved.
+FREE TO USE TO CONNECT THE WORLD		</Copyright>
+		<GenerateDocumentationFile>False</GenerateDocumentationFile>
+		<Title>FatRepository</Title>
+		<PackageIcon>fat-repository-icon.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\assets\fat-repository-icon.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.15" />
+	</ItemGroup>
+
+</Project>

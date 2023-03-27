@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatRepository.SQLServer", "FatRepository.SQLServer\FatRepository.SQLServer.csproj", "{8EC65850-D2D7-4685-AE19-1BD9A06A064E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatRepository", "src\FatRepository\FatRepository.csproj", "{8EC65850-D2D7-4685-AE19-1BD9A06A064E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1F1D6E84-A83A-4A88-AA27-725BD0B2349D}"
 EndProject
@@ -11,9 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "__solution-items__", "__sol
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		assets\fat-repository-icon.png = assets\fat-repository-icon.png
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{AB8D60A8-41F8-492F-8190-21686B3E8818}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatRepository.Test.Console", "test\FatRepository.Test.Console\FatRepository.Test.Console.csproj", "{E551608B-68A1-4AD4-83E7-20C4D4146DE2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FatRepository.Test.API", "test\FatRepository.Test.API\FatRepository.Test.API.csproj", "{0596718A-7404-40CF-8508-54015DC1D22D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,12 +32,22 @@ Global
 		{8EC65850-D2D7-4685-AE19-1BD9A06A064E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EC65850-D2D7-4685-AE19-1BD9A06A064E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EC65850-D2D7-4685-AE19-1BD9A06A064E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E551608B-68A1-4AD4-83E7-20C4D4146DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E551608B-68A1-4AD4-83E7-20C4D4146DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E551608B-68A1-4AD4-83E7-20C4D4146DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E551608B-68A1-4AD4-83E7-20C4D4146DE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0596718A-7404-40CF-8508-54015DC1D22D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0596718A-7404-40CF-8508-54015DC1D22D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0596718A-7404-40CF-8508-54015DC1D22D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0596718A-7404-40CF-8508-54015DC1D22D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8EC65850-D2D7-4685-AE19-1BD9A06A064E} = {1F1D6E84-A83A-4A88-AA27-725BD0B2349D}
+		{E551608B-68A1-4AD4-83E7-20C4D4146DE2} = {AB8D60A8-41F8-492F-8190-21686B3E8818}
+		{0596718A-7404-40CF-8508-54015DC1D22D} = {AB8D60A8-41F8-492F-8190-21686B3E8818}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {71DFBE45-F0DF-4073-AB1B-5ED1A78DD3DB}
