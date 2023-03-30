@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace FatRepository.SQLServer.Test.API
+namespace FatRepository.Test.API
 {
     public class WeatherForecast
     {

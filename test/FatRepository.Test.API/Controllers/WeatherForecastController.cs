@@ -1,7 +1,7 @@
 using FatRepository.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FatRepository.SQLServer.Test.API.Controllers
+namespace FatRepository.Test.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -21,7 +21,7 @@ namespace FatRepository.SQLServer.Test.API.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IActionResult> Get()
         {
-            var vals = await _forcastRepository.FindAsync();
+            var vals = await _forcastRepository.AllAsync();
             return Ok(vals);
         }
 

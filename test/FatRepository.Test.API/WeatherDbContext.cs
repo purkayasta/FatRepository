@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace FatRepository.SQLServer.Test.API
+namespace FatRepository.Test.API
 {
     public class WeatherDbContext : DbContext
     {
