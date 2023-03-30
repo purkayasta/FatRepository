@@ -26,7 +26,7 @@ namespace FatRepository.Contracts
         /// This method will return everything inside of a task wrapper so that it can be awaited.
         /// </summary>
         /// <returns></returns>
-        Task<List<TEntity>> AllAsync(bool isTracking = true);
+        Task<List<TEntity>> AllAsync(bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method will return filtered data.
@@ -40,7 +40,7 @@ namespace FatRepository.Contracts
         /// </summary>
         /// <param name="whereQuery"></param>
         /// <returns></returns>
-        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true);
+        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method will return filtered data with some includable foreign property.
@@ -48,7 +48,7 @@ namespace FatRepository.Contracts
         /// <param name="query"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        List<TEntity> Find(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers);
+        List<TEntity> Find(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default);
 
         /// <summary>
         /// This method will return filtered data with some includable foreign property asynchronously.
@@ -56,7 +56,7 @@ namespace FatRepository.Contracts
         /// <param name="query"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers);
+        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method will return with some selective properties.
@@ -74,7 +74,7 @@ namespace FatRepository.Contracts
         /// <param name="query"></param>
         /// <param name="selectQuery"></param>
         /// <returns></returns>
-        Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>> whereQuery, Expression<Func<TEntity, TResult>> selectQuery, bool isTracking = true);
+        Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>> whereQuery, Expression<Func<TEntity, TResult>> selectQuery, bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This method will return limited data as per condition.
@@ -92,7 +92,7 @@ namespace FatRepository.Contracts
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, int? skip, int? take, bool isTracking = true);
+        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, int? skip, int? take, bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This will return filtered limited data with the foregin properties.
@@ -112,7 +112,7 @@ namespace FatRepository.Contracts
         /// <param name="take"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers);
+        Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// This will return limited filtered data with the foreign properties 
@@ -124,7 +124,7 @@ namespace FatRepository.Contracts
         /// <param name="take"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        List<TResult> Find<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers);
+        List<TResult> Find<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default);
 
         /// <summary>
         /// This will return limited filtered data with the foreign properties asynchronously.
@@ -136,7 +136,7 @@ namespace FatRepository.Contracts
         /// <param name="take"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers);
+        Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find the first document.
@@ -148,7 +148,7 @@ namespace FatRepository.Contracts
         /// Find the first document asynchronously.
         /// </summary>
         /// <returns></returns>
-        Task<TEntity?> FindOneAsync(bool isTracking = true);
+        Task<TEntity?> FindOneAsync(bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find the first document with filter query
@@ -162,7 +162,7 @@ namespace FatRepository.Contracts
         /// </summary>
         /// <param name="whereQuery"></param>
         /// <returns></returns>
-        Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true);
+        Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Find the first document with includable members.
@@ -170,7 +170,7 @@ namespace FatRepository.Contracts
         /// <param name="whereQuery"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        TEntity? FindOne(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers);
+        TEntity? FindOne(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default);
 
         /// <summary>
         /// Find the first document with includable members.
@@ -178,14 +178,14 @@ namespace FatRepository.Contracts
         /// <param name="whereQuery"></param>
         /// <param name="includableMembers"></param>
         /// <returns></returns>
-        Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers);
+        Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Insert into db
         /// </summary>
         /// <param name="entites"></param>
         /// <returns></returns>
-        Task InsertAsync(IEnumerable<TEntity> entites);
+        Task InsertAsync(IEnumerable<TEntity> entites, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Insert into db.
@@ -204,20 +204,13 @@ namespace FatRepository.Contracts
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        Task InsertOneAsync(TEntity entity);
+        Task InsertOneAsync(TEntity entity, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update one document.
         /// </summary>
         /// <param name="entity"></param>
         void ModifyOne(TEntity entity);
-
-        /// <summary>
-        /// Update one document.
-        /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
-        Task ModifyOneAsync(TEntity entity);
 
         /// <summary>
         /// Update document in db.
