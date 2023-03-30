@@ -1,5 +1,5 @@
 using FatRepository.Installer;
-using FatRepository.SQLServer.Test.API;
+using FatRepository.Test.API;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

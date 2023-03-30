@@ -1,7 +1,7 @@
 using FatRepository.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace FatRepository.SQLServer.Test.API.Controllers
+namespace FatRepository.Test.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
