@@ -9,7 +9,7 @@ var context = new BloggingContext();
 var repo = FatFactoryInstaller.CreateFatRepository<Blog, BloggingContext>(context);
 var unitOfWork = FatFactoryInstaller.CreateUnitOfWork(context);
 
-var val = repo.Find(x => x.Name!.Equals("asd"), nameof(Blog.Name));
+var val = repo.Find(x => x.Name!.Equals("asd"), includableMembers: nameof(Blog.Name));
 
 var val2 = repo.Find(x => x.Name == "pritom", x => new
 {
