@@ -1,7 +1,7 @@
 ﻿# FatRepository For EFCore
 ## Give it a star if you like the project. 👏 🌠 🌟
 
-FatRepository is an Handful predefined methods that every efcore projects need. 
+FatRepository is an Handful predefined methods that every efcore projects need.
 
 ![Nuget](https://img.shields.io/nuget/v/FatRepository)
 ![Nuget](https://img.shields.io/nuget/dt/FatRepository?style=plastic)
@@ -14,6 +14,16 @@ FatRepository is an Handful predefined methods that every efcore projects need.
 ### Required:
 > Have to configure DbContext first then register the service.
 
+### What you get:
+You will get two interface to intract with.
+```
+1. IFatRepository<Entity,DbContext>();
+2. IFatUnitOfWork<DbContext>();
+```
+
+```IFatRepository``` will give you some handful methods to access to operate. But If you need the <b>full control</b> over your dbset class then ```GetEntity()``` method is there to accomodate your likings.
+
+```IFatUnitOfWork``` will give you all the control related dbcontext class. It is nothing but a wrapper around the ```DbContext.Database``` instance. You can access SaveChanges and Transaction from there.
 
 -------------------------------------------------------------------------
 ### Service Registration:
@@ -47,7 +57,7 @@ public class BlogService
 
 	public void Add(Blog b) 
 	{
-		_repository.Add(b);
+		_repository.InsertOne(b);
 		_unitOfWork.Commit();
 	}
 
