@@ -14,22 +14,28 @@ namespace FatRepository.Implementions
         public ChangeTracker ChangeTracker { get => _dbContext.ChangeTracker; }
 
         public int Commit() => _dbContext.SaveChanges();
-        public Task<int> CommitAsync() => _dbContext.SaveChangesAsync();
+        public Task<int> CommitAsync(CancellationToken cancellationToken = default) => _dbContext.SaveChangesAsync(cancellationToken);
+
 
         public IDbContextTransaction OpenTransaction() => _dbContext.Database.BeginTransaction();
-        public void CloseTransaction() => _dbContext.Database.CommitTransaction();
-        public void RevertTransaction() => _dbContext.Database.RollbackTransaction();
+        public Task<IDbContextTransaction> OpenTransactionAsync(CancellationToken cancellationToken = default) => _dbContext.Database.BeginTransactionAsync(cancellationToken);
 
-        public Task<IDbContextTransaction> OpenTransactionAsync() => _dbContext.Database.BeginTransactionAsync();
-        public Task CloseTransactionAsync() => _dbContext.Database.CommitTransactionAsync();
-        public Task RevertTransactionAsync() => _dbContext.Database.RollbackTransactionAsync();
+
+        public void CloseTransaction() => _dbContext.Database.CommitTransaction();
+        public Task CloseTransactionAsync(CancellationToken cancellationToken = default) => _dbContext.Database.CommitTransactionAsync(cancellationToken);
+
+
+        public void RevertTransaction() => _dbContext.Database.RollbackTransaction();
+        public Task RevertTransactionAsync(CancellationToken cancellationToken = default) => _dbContext.Database.RollbackTransactionAsync(cancellationToken);
 
 
         public IExecutionStrategy CreateStrategy() => _dbContext.Database.CreateExecutionStrategy();
-        public bool DatabaseCreate() => _dbContext.Database.EnsureCreated();
-        public bool DatabaseDelete() => _dbContext.Database.EnsureDeleted();
 
-        public Task<bool> DatabaseCreateAsync() => _dbContext.Database.EnsureCreatedAsync();
-        public Task<bool> DatabaseDeleteAsync() => _dbContext.Database.EnsureDeletedAsync();
+
+        public bool DatabaseCreate() => _dbContext.Database.EnsureCreated();
+        public Task<bool> DatabaseCreateAsync(CancellationToken cancellationToken = default) => _dbContext.Database.EnsureCreatedAsync(cancellationToken);
+
+        public bool DatabaseDelete() => _dbContext.Database.EnsureDeleted();
+        public Task<bool> DatabaseDeleteAsync(CancellationToken cancellationToken = default) => _dbContext.Database.EnsureDeletedAsync(cancellationToken);
     }
 }

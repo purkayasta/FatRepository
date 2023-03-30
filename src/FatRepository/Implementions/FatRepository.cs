@@ -17,14 +17,15 @@ namespace FatRepository.Implementions
         #region Insert and Modify Methods
 
         public void InsertOne(TEntity entity) => _dbSet.Add(entity);
+        public async Task InsertOneAsync(TEntity entity, CancellationToken cancellationToken = default) => await _dbSet.AddAsync(entity, cancellationToken);
+
         public void Insert(IEnumerable<TEntity> entities) => _dbSet.AddRange(entities);
+        public Task InsertAsync(IEnumerable<TEntity> entites, CancellationToken cancellationToken = default) => _dbSet.AddRangeAsync(entites, cancellationToken);
+
         public void ModifyOne(TEntity entity) => _dbSet.Update(entity);
         public void Modify(IEnumerable<TEntity> entities) => _dbSet.UpdateRange(entities);
 
 
-        public async Task InsertOneAsync(TEntity entity) => await _dbSet.AddAsync(entity);
-        public Task InsertAsync(IEnumerable<TEntity> entites) => _dbSet.AddRangeAsync(entites);
-        public Task ModifyOneAsync(TEntity entity) => Task.FromResult(_dbSet.Update(entity));
 
         #endregion
 
@@ -35,48 +36,50 @@ namespace FatRepository.Implementions
             if (isTracking) return _dbSet.FirstOrDefault();
             return _dbSet.AsNoTracking().FirstOrDefault();
         }
-        public Task<TEntity?> FindOneAsync(bool isTracking = true)
+        public Task<TEntity?> FindOneAsync(bool isTracking = true, CancellationToken cancellationToken = default)
         {
-            if (isTracking) return _dbSet.FirstOrDefaultAsync();
-            return _dbSet.AsNoTracking().FirstOrDefaultAsync();
+            if (isTracking) return _dbSet.FirstOrDefaultAsync(cancellationToken);
+            return _dbSet.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
+
         public TEntity? FindOne(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true)
         {
             if (isTracking) return _dbSet.Where(whereQuery).FirstOrDefault();
             return _dbSet.Where(whereQuery).AsNoTracking().FirstOrDefault();
         }
-        public Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true)
+        public Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, CancellationToken cancellationToken = default)
         {
-            if (isTracking) _dbSet.Where(whereQuery).FirstOrDefaultAsync();
-            return _dbSet.Where(whereQuery).AsNoTracking().FirstOrDefaultAsync();
+            if (isTracking) _dbSet.Where(whereQuery).FirstOrDefaultAsync(cancellationToken);
+            return _dbSet.Where(whereQuery).AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
 
         #endregion
 
         #region FindOne Queries With Include
 
-        public TEntity? FindOne(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers)
+        public TEntity? FindOne(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default)
         {
             IQueryable<TEntity> queryable = _dbSet.Where(whereQuery);
 
-            if (includableMembers.Length < 1) throw new ArgumentException($"{nameof(includableMembers)} cannot be empty");
-
-            foreach (string member in includableMembers) queryable.Include(member);
+            if (includableMembers is not null && includableMembers.Length > 0)
+            {
+                foreach (string member in includableMembers) queryable.Include(member);
+            }
 
             if (isTracking) return queryable.FirstOrDefault();
             return queryable.AsNoTracking().FirstOrDefault();
         }
-
-        public Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers)
+        public Task<TEntity?> FindOneAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = _dbSet.Where(whereQuery);
 
-            if (includableMembers.Length < 1) throw new ArgumentException($"{nameof(includableMembers)} cannot be empty");
+            if (includableMembers is not null && includableMembers.Length > 0)
+            {
+                foreach (string member in includableMembers) queryable.Include(member);
+            }
 
-            foreach (string member in includableMembers) queryable.Include(member);
-
-            if (isTracking) return queryable.FirstOrDefaultAsync();
-            return queryable.AsNoTracking().FirstOrDefaultAsync();
+            if (isTracking) return queryable.FirstOrDefaultAsync(cancellationToken);
+            return queryable.AsNoTracking().FirstOrDefaultAsync(cancellationToken);
         }
 
         #endregion
@@ -88,10 +91,10 @@ namespace FatRepository.Implementions
             if (isTracking) return _dbSet.ToList();
             return _dbSet.AsNoTracking().ToList();
         }
-        public Task<List<TEntity>> AllAsync(bool isTracking = true)
+        public Task<List<TEntity>> AllAsync(bool isTracking = true, CancellationToken cancellationToken = default)
         {
-            if (isTracking) return _dbSet.ToListAsync();
-            return _dbSet.AsNoTracking().ToListAsync();
+            if (isTracking) return _dbSet.ToListAsync(cancellationToken);
+            return _dbSet.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         public List<TEntity> Find(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true)
@@ -99,38 +102,40 @@ namespace FatRepository.Implementions
             if (isTracking) return _dbSet.Where(whereQuery).ToList();
             return _dbSet.Where(whereQuery).AsNoTracking().ToList();
         }
-        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true)
+        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, CancellationToken cancellationToken = default)
         {
-            if (isTracking) return _dbSet.Where(whereQuery).ToListAsync();
-            return _dbSet.Where(whereQuery).AsNoTracking().ToListAsync();
+            if (isTracking) return _dbSet.Where(whereQuery).ToListAsync(cancellationToken);
+            return _dbSet.Where(whereQuery).AsNoTracking().ToListAsync(cancellationToken);
         }
 
         #endregion
 
         #region Find Queries with Include
 
-        public List<TEntity> Find(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers)
+        public List<TEntity> Find(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default)
         {
-            if (includableMembers.Length < 1) throw new ArgumentException($"{nameof(includableMembers)} is empty");
-
             IQueryable<TEntity> queryable = _dbSet.Where(whereQuery);
 
-            foreach (string member in includableMembers) queryable.Include(member);
+            if (includableMembers is not null && includableMembers.Length > 0)
+            {
+                foreach (string member in includableMembers) queryable.Include(member);
+            }
 
             if (isTracking) return queryable.ToList();
             return queryable.AsNoTracking().ToList();
         }
 
-        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, params string[] includableMembers)
+        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> whereQuery, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default)
         {
-            if (includableMembers.Length < 1) throw new ArgumentException($"{nameof(includableMembers)} is empty");
-
             IQueryable<TEntity> queryable = _dbSet.Where(whereQuery);
 
-            foreach (string member in includableMembers) queryable.Include(member);
+            if (includableMembers is not null && includableMembers.Length > 0)
+            {
+                foreach (string member in includableMembers) queryable.Include(member);
+            }
 
-            if (isTracking) return queryable.ToListAsync();
-            return queryable.AsNoTracking().ToListAsync();
+            if (isTracking) return queryable.ToListAsync(cancellationToken);
+            return queryable.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         #endregion
@@ -143,10 +148,10 @@ namespace FatRepository.Implementions
             return _dbSet.Where(whereQuery).AsNoTracking().Select(selectQuery).ToList();
         }
 
-        public Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>> whereQuery, Expression<Func<TEntity, TResult>> selectQuery, bool isTracking = true)
+        public Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>> whereQuery, Expression<Func<TEntity, TResult>> selectQuery, bool isTracking = true, CancellationToken cancellationToken = default)
         {
-            if (isTracking) return _dbSet.Where(whereQuery).Select(selectQuery).ToListAsync();
-            return _dbSet.Where(whereQuery).AsNoTracking().Select(selectQuery).ToListAsync();
+            if (isTracking) return _dbSet.Where(whereQuery).Select(selectQuery).ToListAsync(cancellationToken);
+            return _dbSet.Where(whereQuery).AsNoTracking().Select(selectQuery).ToListAsync(cancellationToken);
         }
 
         #endregion
@@ -172,7 +177,7 @@ namespace FatRepository.Implementions
             return queryable.ToList();
         }
 
-        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> query, int? skip, int? take, bool isTracking = true)
+        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>> query, int? skip, int? take, bool isTracking = true, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = _dbSet.Where(query).AsQueryable();
 
@@ -187,15 +192,15 @@ namespace FatRepository.Implementions
                 if (isTakeCountExist) queryable.Take(take!.Value);
             }
 
-            if (isTracking) return queryable.ToListAsync();
-            return queryable.AsNoTracking().ToListAsync();
+            if (isTracking) return queryable.ToListAsync(cancellationToken);
+            return queryable.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         #endregion
 
         #region All Option (select, pagination, include)
 
-        public List<TResult> Find<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers)
+        public List<TResult> Find<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default)
         {
             IQueryable<TEntity> queryable = _dbSet.AsQueryable();
 
@@ -221,7 +226,7 @@ namespace FatRepository.Implementions
             return queryable.AsNoTracking().Select(selectQuery).ToList();
         }
 
-        public Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers)
+        public Task<List<TResult>> FindAsync<TResult>(Expression<Func<TEntity, bool>>? whereQuery, Expression<Func<TEntity, TResult>> selectQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = _dbSet.AsQueryable();
 
@@ -243,11 +248,11 @@ namespace FatRepository.Implementions
                 if (isTakeCountExist) queryable.Take(take!.Value);
             }
 
-            if (isTracking) return queryable.Select(selectQuery).ToListAsync();
-            return queryable.AsNoTracking().Select(selectQuery).ToListAsync();
+            if (isTracking) return queryable.Select(selectQuery).ToListAsync(cancellationToken);
+            return queryable.AsNoTracking().Select(selectQuery).ToListAsync(cancellationToken);
         }
 
-        public List<TEntity> Find(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers)
+        public List<TEntity> Find(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default)
         {
             IQueryable<TEntity> queryable = _dbSet.AsQueryable();
 
@@ -274,7 +279,7 @@ namespace FatRepository.Implementions
             return queryable.AsNoTracking().ToList();
         }
 
-        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, params string[]? includableMembers)
+        public Task<List<TEntity>> FindAsync(Expression<Func<TEntity, bool>>? whereQuery, int? skip, int? take, bool isTracking = true, string[]? includableMembers = default, CancellationToken cancellationToken = default)
         {
             IQueryable<TEntity> queryable = _dbSet.AsQueryable();
 
@@ -297,8 +302,8 @@ namespace FatRepository.Implementions
                 if (isTakeCountExist) queryable.Take(take!.Value);
             }
 
-            if (isTracking) return queryable.ToListAsync();
-            return queryable.AsNoTracking().ToListAsync();
+            if (isTracking) return queryable.ToListAsync(cancellationToken);
+            return queryable.AsNoTracking().ToListAsync(cancellationToken);
         }
 
         #endregion
