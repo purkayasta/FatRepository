@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 var context = new BloggingContext();
 
 var repo = FatFactoryInstaller.CreateFatRepository<Blog, BloggingContext>(context);
-var unitOfWork = FatFactoryInstaller.CreateUnitOfWork(context);
+var database = FatFactoryInstaller.CreateUnitOfWork(context);
 
 var val = repo.Find(x => x.Name!.Equals("asd"), includableMembers: new string[] { nameof(Blog.Name) });
 
@@ -25,7 +25,7 @@ var blogSummaries = context.Blogs!
     })
     .ToList();
 
-unitOfWork.Commit();
+database.Commit();
 
 
 

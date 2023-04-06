@@ -1,14 +1,7 @@
 ﻿# FatRepository For EFCore
-## Give it a star if you like the project. 👏 🌠 🌟
+## Give it a star on [github](https://github.com/purkayasta/FatRepository) if you like the project. 👏 🌠 🌟
 
 FatRepository is an Handful predefined methods that every efcore projects need.
-
-![Nuget](https://img.shields.io/nuget/v/FatRepository)
-![Nuget](https://img.shields.io/nuget/dt/FatRepository?style=plastic)
-![Nuget](https://img.shields.io/github/repo-size/purkayasta/FatRepository?style=social)
-![Nuget](https://img.shields.io/github/last-commit/purkayasta/FatRepository?style=flat-square)
-
-[Nuget](https://www.nuget.org/packages/FatRepository/)
 
 ## Usage:
 ### Required:
@@ -46,7 +39,7 @@ Now you can use this in your application service layer.
 ```c#
 public class BlogService 
 {
-	private readonly IFatRepository<Blog, YourDbContext> _repository;
+	private readony IFatRepository<Blog, YourDbContext> _repository;
 	private readonly IFatDatabase<YourDbContext _database;
 
 	public BlogService(IFatRepository<Blog, YourDbContext> repo, IFatDatabase<YourDbContext> database) 

@@ -9,9 +9,9 @@ namespace FatRepository.Test.API.Controllers
     {
         private readonly ILogger<WeatherForecastController> _logger;
         private readonly IFatRepository<WeatherForecast, WeatherDbContext> _forcastRepository;
-        private readonly IFatUnitOfWork<WeatherDbContext> _fatUnitOfWork;
+        private readonly IFatDatabase<WeatherDbContext> _fatUnitOfWork;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IFatRepository<WeatherForecast, WeatherDbContext> forcastRepository, IFatUnitOfWork<WeatherDbContext> fatUnitOfWork)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IFatRepository<WeatherForecast, WeatherDbContext> forcastRepository, IFatDatabase<WeatherDbContext> fatUnitOfWork)
         {
             _logger = logger;
             _forcastRepository = forcastRepository;
