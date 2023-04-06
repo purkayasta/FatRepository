@@ -25,7 +25,8 @@
 		<Title>FatRepository</Title>
 		<PackageIcon>fat-repository-icon.png</PackageIcon>
 		<PackageReadmeFile>nuget.md</PackageReadmeFile>
-
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
