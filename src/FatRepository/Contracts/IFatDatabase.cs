@@ -8,7 +8,7 @@ namespace FatRepository.Contracts
     /// Access control for DbContext instance.
     /// </summary>
     /// <typeparam name="TDbContext"></typeparam>
-    public interface IFatUnitOfWork<TDbContext> where TDbContext : DbContext
+    public interface IFatDatabase<TDbContext> where TDbContext : DbContext
     {
         /// <summary>
         ///     Provides access to information and operations for entity instances this context is tracking.
