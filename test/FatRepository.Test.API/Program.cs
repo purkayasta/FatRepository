@@ -11,11 +11,9 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<WeatherDbContext>(options =>
 {
     options.UseInMemoryDatabase("weather-db");
-    //options.UseSqlite("weather-db");
 });
 
 builder.Services.AddFatRepository();
-//builder.Services.AddScoped(typeof(IWeatherRepo<,>), typeof(WeatherRepo<,>));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

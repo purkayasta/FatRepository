@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 var context = new BloggingContext();
 
-var repo = FatFactoryInstaller.CreateFatRepository<Blog, BloggingContext>(context);
-var database = FatFactoryInstaller.CreateUnitOfWork(context);
+var repo = FatFactoryInstaller.CreateRepository<Blog, BloggingContext>(context);
+var database = FatFactoryInstaller.CreateDatabase(context);
 
 var val = repo.Find(x => x.Name!.Equals("asd"), includableMembers: new string[] { nameof(Blog.Name) });
 
